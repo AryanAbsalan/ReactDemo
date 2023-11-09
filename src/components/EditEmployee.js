@@ -34,9 +34,8 @@ function EditEmployee(props) {
             id="editmodal"
             className="w-full max-w-sm"
             onSubmit={(e)=>{
-              handleClose()
               e.preventDefault()
-              props.updateEmployee(props.id,name,role)
+              props.UpdateEmployee(props.id,name,role)
             }}>
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/3">
@@ -86,6 +85,7 @@ function EditEmployee(props) {
             Close
           </button>
           <button
+          onClick={handleClose}
             form="editmodal"
             className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
           >
