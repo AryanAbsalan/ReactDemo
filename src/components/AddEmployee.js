@@ -38,7 +38,7 @@ function AddEmployee(props) {
               setName('');
               setRole('');
               setImg('');
-              props.NewEmployee(name,role,img)
+              props.newEmployee(name,role,img)
             }}>
             <div className="md:flex md:items-center mb-6">
               <div className="md:w-1/3">

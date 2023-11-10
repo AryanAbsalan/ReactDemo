@@ -1,8 +1,13 @@
 import "./index.css";
 import Employee from "./components/Employee";
+import EditEmployee from "./components/EditEmployee";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import AddEmployee from "./components/AddEmployee";
+import InfoEmployee from "./components/InfoEmployee";
+import Header from "./components/Header";
+
+
 
 function App() {
 
@@ -57,7 +62,7 @@ function App() {
     },
   ]);
 
-  function UpdateEmployee(id, newName, newRole) {
+  function updateEmployee(id, newName, newRole) {
     const updatedEmployees = employees.map((employee) => {
       if (employee.id == id) {
         return { ...employee, name: newName, role: newRole };
@@ -66,21 +71,47 @@ function App() {
     });
     setEmployees(updatedEmployees);
   }
+  
+  function showEmployeeInfo(name, role) {
+    console.log('From showEmployeeInfo:' + name + ' ' + role);
+  }
 
-  function NewEmployee(name, role, img) {
+  function newEmployee(name, role, img) {
     const newEmployee = {
       id: uuidv4(),
       name: name,
       role: role,
       img: img,
     }
-    setEmployees([ ...employees, newEmployee ]);
+    setEmployees([...employees, newEmployee]);
   }
 
   return (
-    <div className="m-2 App">
+    <div className="App">
+      <Header/>
       <div className="flex flex-wrap justify-center ">
         {employees.map((employee) => {
+
+          const editEmployee = (
+            <EditEmployee
+              id={employee.id}
+              name={employee.name}
+              role={employee.role}
+              updateEmployee={updateEmployee}
+            />
+          );
+
+          const infoEmployee = (
+            <InfoEmployee
+              id={employee.id}
+              name={employee.name}
+              role={employee.role}
+              title='title'
+              location='location'
+              showEmployeeInfo={showEmployeeInfo}
+            />
+          );
+
           return (
             <div className=" m-2">
               <Employee
@@ -89,14 +120,17 @@ function App() {
                 name={employee.name}
                 role={employee.role}
                 img={employee.img}
-                UpdateEmployee={UpdateEmployee}
+                // Passing Components as props
+                editEmployee={editEmployee}
+                infoEmployee={infoEmployee}
               />
             </div>
           );
         })}
       </div>
+
       <AddEmployee
-        NewEmployee={NewEmployee}
+        newEmployee={newEmployee}
       />
     </div>
   );
