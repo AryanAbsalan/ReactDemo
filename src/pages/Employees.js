@@ -5,8 +5,6 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import AddEmployee from "../components/AddEmployee";
 import InfoEmployee from "../components/InfoEmployee";
-import Header from "../components/Header";
-
 
 
 function Employees() {
